@@ -132,18 +132,16 @@ public class MasterServiceImpl implements MasterService {
     @Override
     public Object saveOrUpdateReview(ReviewRequest reviewRequest) {
 
-        if (reviewRepository.existsById(reviewRequest.getReviewId()))
-        {
-          Review review=reviewRepository.findById(reviewRequest.getReviewId()).get();
-          review.setComment(reviewRequest.getComment());
-          review.setRating(reviewRequest.getRating());
-          review.setBookId(reviewRequest.getBookId());
-          review.setUserId(reviewRequest.getUserId());
-          review.setReviewId(reviewRequest.getReviewId());
-          reviewRepository.save(review);
-          return "Your review is updated";
-        }
-        else{
+        if (reviewRepository.existsById(reviewRequest.getReviewId())) {
+            Review review = reviewRepository.findById(reviewRequest.getReviewId()).get();
+            review.setComment(reviewRequest.getComment());
+            review.setRating(reviewRequest.getRating());
+            review.setBookId(reviewRequest.getBookId());
+            review.setUserId(reviewRequest.getUserId());
+            review.setReviewId(reviewRequest.getReviewId());
+            reviewRepository.save(review);
+            return "Your review is updated";
+        } else {
             Review review = new Review();
             review.setUserId(reviewRequest.getUserId());
             review.setBookId(reviewRequest.getBookId());
@@ -240,7 +238,7 @@ public class MasterServiceImpl implements MasterService {
         } else {
             return "review not found for given bookId";
         }
-     //getReviewByBookId() ends here
+        //getReviewByBookId() ends here
     }
 
     public boolean isValidTransition(String status, OrderStatus newStatus) {
